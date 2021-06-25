@@ -70,4 +70,6 @@ if __name__ == '__main__':
     parser.add_argument('--cpu', type=int, default=1)
     args = parser.parse_args()
     exp_name = args.exp_name if not(args.exp_name=='') else None
+
+    
     main(args.robot, args.task, args.algo, args.seed, exp_name, args.cpu)

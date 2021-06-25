@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+import gym, safety_gym
 import time
 import numpy as np
 from safe_rl.utils.load_utils import load_policy
@@ -48,8 +48,11 @@ if __name__ == '__main__':
     parser.add_argument('--norender', '-nr', action='store_true')
     parser.add_argument('--itr', '-i', type=int, default=-1)
     parser.add_argument('--deterministic', '-d', action='store_true')
+    parser.add_argument('--env',type=str, default="")
     args = parser.parse_args()
     env, get_action, sess = load_policy(args.fpath,
                                         args.itr if args.itr >=0 else 'last',
                                         args.deterministic)
+    if args.env is not "":
+        env = gym.make(args.env)
     run_policy(env, get_action, args.len, args.episodes, not(args.norender))
